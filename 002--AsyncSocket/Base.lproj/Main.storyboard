@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="ViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="发送消息" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="gl3-8R-gVK">
+                                <rect key="frame" x="20" y="318" width="255" height="30"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2hN-Vk-oCF">
+                                <rect key="frame" x="295" y="318" width="60" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="60" id="v1r-se-ERf"/>
+                                </constraints>
+                                <state key="normal" title="发送"/>
+                                <connections>
+                                    <action selector="sendAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="BV2-73-jQn"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1iQ-Ly-hBB">
+                                <rect key="frame" x="20" y="268" width="60" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="60" id="MCs-da-O7d"/>
+                                </constraints>
+                                <state key="normal" title="连接"/>
+                                <connections>
+                                    <action selector="connectAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="bZ0-No-wUd"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XFe-9f-mef">
+                                <rect key="frame" x="295" y="268" width="60" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="60" id="oyN-L3-ws2"/>
+                                </constraints>
+                                <state key="normal" title="断开"/>
+                                <connections>
+                                    <action selector="disConnectAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="r10-4r-pYM"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6qp-n1-8mY">
+                                <rect key="frame" x="20" y="368" width="80" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="80" id="D5P-Gv-Z7P"/>
+                                    <constraint firstAttribute="height" constant="30" id="WfO-GX-DX7"/>
+                                </constraints>
+                                <state key="normal" title="发送图片"/>
+                                <connections>
+                                    <action selector="sendImageAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="LdW-Ms-9FU"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="6qp-n1-8mY" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="8AT-ZS-JNb"/>
+                            <constraint firstItem="2hN-Vk-oCF" firstAttribute="top" secondItem="XFe-9f-mef" secondAttribute="bottom" constant="20" id="DVb-KC-pGM"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="2hN-Vk-oCF" secondAttribute="trailing" constant="20" id="J9d-Mg-9WW"/>
+                            <constraint firstItem="gl3-8R-gVK" firstAttribute="top" secondItem="1iQ-Ly-hBB" secondAttribute="bottom" constant="20" id="OJ6-2R-cia"/>
+                            <constraint firstItem="gl3-8R-gVK" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="PsN-ff-Sm6"/>
+                            <constraint firstItem="gl3-8R-gVK" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="YDP-qE-L6B"/>
+                            <constraint firstItem="2hN-Vk-oCF" firstAttribute="leading" secondItem="gl3-8R-gVK" secondAttribute="trailing" constant="20" id="YeY-gp-Ipy"/>
+                            <constraint firstItem="1iQ-Ly-hBB" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="p3j-EK-trK"/>
+                            <constraint firstItem="6qp-n1-8mY" firstAttribute="top" secondItem="gl3-8R-gVK" secondAttribute="bottom" constant="20" id="tu6-mC-VeS"/>
+                            <constraint firstItem="2hN-Vk-oCF" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="v9D-9C-aWS"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="XFe-9f-mef" secondAttribute="trailing" constant="20" id="xbL-ji-nfF"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                    </view>
+                    <connections>
+                        <outlet property="textField" destination="gl3-8R-gVK" id="z15-x7-Y8b"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="140" y="132.68365817091455"/>
+        </scene>
+    </scenes>
+</document>
