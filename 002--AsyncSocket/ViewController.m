@@ -69,7 +69,9 @@ static const short server_port = 6969;
         _drawView_ShapeLayer.autoresizingMask = UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight;
         __weak __typeof(self)weakSelf = self;
         _drawView_ShapeLayer.block = ^(NSMutableArray *points) {
-            [weakSelf sendPoint:points];
+            for (int i =0; i<10; i++) {
+                 [weakSelf sendPoint:points];
+            }
         };
     }
     return _drawView_ShapeLayer;
@@ -137,24 +139,62 @@ static const short server_port = 6969;
     NSData *jsonData = [NSJSONSerialization dataWithJSONObject:pointList options:NSJSONWritingPrettyPrinted error:nil];
     NSString *jsonString = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
     
-    NSData *data = [jsonString dataUsingEncoding:NSUTF8StringEncoding];
+    NSData *data = [@"123" dataUsingEncoding:NSUTF8StringEncoding];
     
     [_clientSocket writeData:data withTimeout:-1 tag:0];
 }
 - (IBAction)sendAction:(UIButton *)sender{
 //    NSData *data = [_textField.text dataUsingEncoding:NSUTF8StringEncoding];
 //    NSLog(@"发送消息:(%@)",[[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding]);
-   
-    NSArray * ar = @[@"000008",@"000725"];
-
-    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:ar options:NSJSONWritingPrettyPrinted error:nil];
-    NSString *jsonString = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
     
-    NSData *data = [jsonString dataUsingEncoding:NSUTF8StringEncoding];
+    NSData * data = [@"下午好" dataUsingEncoding:NSUTF8StringEncoding];
+    NSData * data2 = [@"李勇" dataUsingEncoding:NSUTF8StringEncoding];
+    NSData * data3 = [@"请问你下干嘛呢" dataUsingEncoding:NSUTF8StringEncoding];
+    NSData * data4 = [@"收到后，请回复" dataUsingEncoding:NSUTF8StringEncoding];
+    NSData * data5 = [@"回复啊" dataUsingEncoding:NSUTF8StringEncoding];
+    
+    NSString *filePath = [[NSBundle mainBundle]pathForResource:@"icon_socket" ofType:@"png"];
+    NSData *data6 = [NSData dataWithContentsOfFile:filePath];
+    [self sendData:[self packageData:data type:@"text"]];
+    [self sendData:[self packageData:data2 type:@"text"]];
+    [self sendData:[self packageData:data3 type:@"text"]];
+    [self sendData:[self packageData:data4 type:@"text"]];
+    [self sendData:[self packageData:data5 type:@"text"]];
+    [self sendData:[self packageData:data6 type:@"img"]];
 
-    [_clientSocket writeData:data withTimeout:-1 tag:0];
+    
+   //测试封包，注释下面
+//    NSArray * ar = @[@"000008",@"000725"];
+//
+//    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:ar options:NSJSONWritingPrettyPrinted error:nil];
+//    NSString *jsonString = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+//
+//    NSData *data = [jsonString dataUsingEncoding:NSUTF8StringEncoding];
+//
+//    [_clientSocket writeData:data withTimeout:-1 tag:0];
+    
 }
-
+- (NSData *)packageData:(NSData *)data type:(NSString *)type{
+    NSMutableDictionary * dict = [NSMutableDictionary dictionary];
+    [dict setObject:[NSString stringWithFormat:@"%lu",(unsigned long)data.length] forKey:@"size"];
+    [dict setObject:type forKey:@"type"];
+    NSString * jsonString = [self dictToJsonString:dict];
+    NSData * headerData = [jsonString dataUsingEncoding:NSUTF8StringEncoding];
+    
+    NSMutableData * mutData = [NSMutableData dataWithData:headerData];
+    [mutData appendData:[GCDAsyncSocket CRLFData]];
+     
+    [mutData appendData:data];
+    
+    return mutData;
+}
+- (NSString *)dictToJsonString:(NSMutableDictionary *)dict{
+    NSData * data = [NSJSONSerialization dataWithJSONObject:dict options:NSJSONWritingPrettyPrinted error:nil];
+    return [[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding];
+}
+- (void)sendData:(NSData *)data{
+      [_clientSocket writeData:data withTimeout:-1 tag:0];
+}
 - (IBAction)sendImageAction:(id)sender {
     [self sendImage];
 }
